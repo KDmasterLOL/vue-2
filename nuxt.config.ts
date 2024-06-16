@@ -13,4 +13,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  app: {
+    baseURL: '/vue-2/'
+  }
 })
