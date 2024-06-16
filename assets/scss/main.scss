@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-size: 18px;
+}
+
+@layer base {
+  h1 {
+    @apply text-xl md:text-2xl font-bold mt-3;
+  }
+
+  h2 {
+    @apply text-xl font-bold;
+  }
+
+  h3 {
+    @apply text-md font-bold;
+  }
+
+  p {
+    @apply my-3;
+  }
+
+  label {
+    @apply text-xs block mb-[5px];
+  }
+
+  input {
+    @apply border border-[#BCBCBC] rounded-md h-[40px];
+  }
+
+  button,
+  .btn {
+    @apply px-[20px] py-[11px] rounded-md hover:bg-black/10;
+
+    &.clean {
+      @apply px-0 py-0;
+    }
+
+    &.fill {
+      @apply bg-primary-light text-white hover:bg-primary-dark;
+    }
+
+    &.outline {
+      @apply border outline-transparent border-primary-light box-content;
+    }
+  }
+}
