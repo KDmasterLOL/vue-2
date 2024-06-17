@@ -16,7 +16,7 @@ const props = defineProps<{
         <slot />
       </div>
       <div class="grow"></div>
-      <a class="btn fill w-full text-center" :href="document_url">Перейти</a>
+      <NuxtLink class="btn fill w-full text-center" :to="document_url">Перейти</NuxtLink>
     </article>
   </div>
 </template>

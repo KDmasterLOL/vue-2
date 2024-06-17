@@ -2,8 +2,26 @@
 definePageMeta({
   breadcrumbs: "Главная страница",
 })
+
+import { ref } from 'vue'
+import { useFloating, offset, shift } from '@floating-ui/vue'
+
 let modal_is_open = ref(false)
 
+const reference = ref(null)
+const floating = ref(null)
+const { floatingStyles } = useFloating(reference, floating, {
+  placement: 'top-center',
+  middleware: [offset(4), shift()]
+})
+const feedback = ref(false)
+const show_feedback = (e) => {
+  e.preventDefault()
+  feedback.value = true
+  setTimeout(() => {
+    feedback.value = false
+  }, 3000);
+};
 </script>
 <template>
   <div class="contents">
@@ -32,9 +50,13 @@ let modal_is_open = ref(false)
             <input class="w-[100%]" type="text" id="ts">
           </div>
           <div class="mt-[15px]">
-            <button class="fill mr-[21px]" type="submit">Проверить штрафы <Icon icon="arrow.svg"
-                class="inline ml-[4px]"></Icon>
+            <button ref="reference" class="fill mr-[21px]" @click="show_feedback" type="submit">Проверить штрафы <Icon
+                icon="arrow.svg" class="inline ml-[4px]"></Icon>
             </button>
+            <div ref="floating" :style="floatingStyles" v-if="feedback">
+              <p class="p-3 rounded-sm border border-gray-100 bg-green-50 font-bold">Данные были успешно отправлены
+              </p>
+            </div>
             <button class="outline" type="button" @click="modal_is_open = true">
               <Icon icon="youtube.svg" class="inline mr-[3px]"></Icon>
               О сервисе <span class="text-primary-dark text-sm">(1 мин. 20 сек)</span>

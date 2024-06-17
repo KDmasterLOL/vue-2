@@ -4,5 +4,5 @@ const props = defineProps<{
 }>()
 </script>
 <template>
-  <img :src="'/img/icons/' + icon" alt="">
+  <img :src="'/vue-2/img/icons/' + icon" alt="">
 </template>
