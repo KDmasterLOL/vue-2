@@ -15,12 +15,17 @@ const { floatingStyles } = useFloating(reference, floating, {
   middleware: [offset(4), shift()]
 })
 const feedback = ref(false)
+const form = ref(null)
 const show_feedback = (e) => {
   e.preventDefault()
-  feedback.value = true
-  setTimeout(() => {
-    feedback.value = false
-  }, 3000);
+  if (form.value.checkValidity()) {
+    feedback.value = true
+    setTimeout(() => {
+      feedback.value = false
+      form.value.submit()
+    }, 3000)
+  }
+
 };
 </script>
 <template>
@@ -34,20 +39,20 @@ const show_feedback = (e) => {
     <section class="grid grid-cols-1 xl:grid-cols-2 justify-center items-center mt-[80px] gap-x-[40px]">
       <div>
         <h1>Проверьте штрафы и зарегестрируйтесь в 1 клик</h1>
-        <form action="#" class="mt-5">
+        <form action="#" class="mt-5" ref="form">
           <div class="grid grid-cols-3 gap-x-[30px]">
             <div class="col-start-1 col-end-3">
               <label for="number-auto">Номер автомобиля</label>
-              <input class="w-[100%]" type="text" id="number-auto">
+              <input class="w-[100%] invalid:border-red-400" required type="text" id="number-auto">
             </div>
             <div>
               <label for="region">Регион</label>
-              <input class="w-[100%]" type="text" id="region">
+              <input class="w-[100%] invalid:border-red-400" required type="text" id="region">
             </div>
           </div>
           <div class="mt-[16px]">
             <label for="ts">Свидетельство о регистрации ТС</label>
-            <input class="w-[100%]" type="text" id="ts">
+            <input class="w-[100%] invalid:border-red-400" required type="text" id="ts">
           </div>
           <div class="mt-[15px]">
             <button ref="reference" class="fill mr-[21px]" @click="show_feedback" type="submit">Проверить штрафы <Icon
